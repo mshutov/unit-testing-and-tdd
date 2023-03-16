@@ -6,4 +6,10 @@ public class Utils {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void require(boolean precondition, String message) {
+        if (!precondition) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }

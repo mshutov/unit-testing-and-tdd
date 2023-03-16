@@ -31,6 +31,20 @@ public class Client {
     }
 
     public void addAccount(Account account) {
+        require(account != null);
+        if (account.getClient() == this) {
+            if (!accounts.contains(account)) {
+                accounts.add(account);
+            }
+        } else {
+            account.getClient().removeAccount(account);
+            Account accountToAdd = account.withClient(this);
+            accounts.add(accountToAdd);
+        }
         accounts.add(account.getClient() == this ? account : account.withClient(this));
+    }
+
+    private void removeAccount(Account account) {
+        accounts.remove(account);
     }
 }

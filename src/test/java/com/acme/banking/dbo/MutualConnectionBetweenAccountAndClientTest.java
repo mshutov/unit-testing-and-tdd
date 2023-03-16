@@ -44,4 +44,8 @@ public class MutualConnectionBetweenAccountAndClientTest {
                         .allMatch(acc -> acc.getClient() == client && acc.getId() == accountId))
         );
     }
+
+    // todo check that unlinked from old client
+
+    // todo check that we can't directly use withClient
 }
