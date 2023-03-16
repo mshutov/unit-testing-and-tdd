@@ -30,4 +30,9 @@ public class SavingAccount implements Account {
     public Client getClient() {
         return client;
     }
+
+    @Override
+    public Account withClient(Client newClient) {
+        return new SavingAccount(id, newClient, amount);
+    }
 }
