@@ -66,4 +66,12 @@ public class ClientTest {
 
         assertThrows(IllegalArgumentException.class, () -> new Client(VALID_ID, clientName));
     }
+
+    @SuppressWarnings("DataFlowIssue")
+    @Test
+    public void shouldNotAllowToAddAbsentAccount() {
+        Client sut = new Client(VALID_ID, VALID_CLIENT_NAME);
+
+        assertThrows(IllegalArgumentException.class, () -> sut.addAccount(null));
+    }
 }

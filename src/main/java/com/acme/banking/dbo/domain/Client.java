@@ -38,10 +38,8 @@ public class Client {
             }
         } else {
             account.getClient().removeAccount(account);
-            Account accountToAdd = account.withClient(this);
-            accounts.add(accountToAdd);
+            accounts.add(account.withClient(this));
         }
-        accounts.add(account.getClient() == this ? account : account.withClient(this));
     }
 
     private void removeAccount(Account account) {

@@ -45,7 +45,35 @@ public class MutualConnectionBetweenAccountAndClientTest {
         );
     }
 
-    // todo check that unlinked from old client
+    @Test
+    public void shouldRemoveAccountFromOldClientWhenAccountAddedToNewClient() {
+        Client newClient = new Client(0, "New Client");
+        Client oldClient = new Client(1, "Old Client");
+        Account account = new SavingAccount(0, oldClient, 0.0);
+        oldClient.addAccount(account);
 
-    // todo check that we can't directly use withClient
+        assumeThat(!oldClient.getAccounts().isEmpty());
+        assumeThat(oldClient == account.getClient());
+
+        newClient.addAccount(account);
+
+        assertTrue(oldClient.getAccounts().isEmpty());
+    }
+
+    @Test
+    public void shouldNotAddAccountWhenSameAccountAddedToClient() {
+        Client client = new Client(0, "A Client");
+        Account account = new SavingAccount(0, client, 0.0);
+        client.addAccount(account);
+
+        assumeThat(client.getAccounts().size() == 1);
+        assumeThat(client.getAccounts().contains(account));
+
+        client.addAccount(account);
+
+        assertAll(
+                () -> assertEquals(1, client.getAccounts().size()),
+                () -> assertTrue(client.getAccounts().contains(account))
+        );
+    }
 }
