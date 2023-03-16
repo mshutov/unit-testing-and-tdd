@@ -16,10 +16,11 @@ public class SavingAccountTest {
     @Test
     public void shouldCreateSavingAccountWhenArgumentsAreValid() {
         SavingAccount sut = new SavingAccount(VALID_ID, VALID_CLIENT, VALID_AMOUNT);
-
-        assertEquals(VALID_ID, sut.getId());
-        assertEquals(VALID_CLIENT, sut.getClient());
-        assertEquals(VALID_AMOUNT, sut.getAmount());
+        assertAll(
+                () -> assertEquals(VALID_ID, sut.getId()),
+                () -> assertEquals(VALID_CLIENT, sut.getClient()),
+                () -> assertEquals(VALID_AMOUNT, sut.getAmount())
+        );
     }
 
     @Test
@@ -28,9 +29,11 @@ public class SavingAccountTest {
         double validNonDefaultValue = 1.0;
         SavingAccount sut = new SavingAccount(validNonDefaultId, VALID_CLIENT, validNonDefaultValue);
 
-        assertEquals(validNonDefaultId, sut.getId());
-        assertEquals(VALID_CLIENT, sut.getClient());
-        assertEquals(validNonDefaultValue, sut.getAmount());
+        assertAll(
+                () -> assertEquals(validNonDefaultId, sut.getId()),
+                () -> assertEquals(VALID_CLIENT, sut.getClient()),
+                () -> assertEquals(validNonDefaultValue, sut.getAmount())
+        );
     }
 
     @Test

@@ -4,9 +4,6 @@ import com.acme.banking.dbo.domain.Client;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -30,25 +27,10 @@ public class ClientTest {
         //endregion
 
         //region then
-        //Junit5:
         assertAll("Client store its properties",
                 () -> assertEquals(clientId, sut.getId()),
                 () -> assertEquals(clientName, sut.getName())
         );
-
-        //Hamcrest:
-        assertThat(sut,
-            allOf(
-                hasProperty("id", notNullValue()),
-                hasProperty("id", equalTo(clientId)),
-                hasProperty("name", is(clientName))
-        ));
-
-        //AssertJ:
-        org.assertj.core.api.Assertions.assertThat(sut)
-                .hasFieldOrPropertyWithValue("id", clientId)
-                .hasFieldOrPropertyWithValue("name", clientName);
-        //also take a look at `extracting()` https://stackoverflow.com/a/51812188
         //endregion
     }
 
@@ -58,8 +40,10 @@ public class ClientTest {
 
         Client sut = new Client(validNonDefaultId, VALID_CLIENT_NAME);
 
-        assertEquals(validNonDefaultId, sut.getId());
-        assertEquals(VALID_CLIENT_NAME, sut.getName());
+        assertAll(
+                () -> assertEquals(validNonDefaultId, sut.getId()),
+                () -> assertEquals(VALID_CLIENT_NAME, sut.getName())
+        );
     }
 
     @Test
