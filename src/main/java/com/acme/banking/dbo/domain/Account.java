@@ -5,4 +5,8 @@ public interface Account {
     double getAmount();
     Client getClient();
     Account withClient(Client newClient);
+
+    Account withdraw(double amount);
+
+    Account deposit(double amount);
 }

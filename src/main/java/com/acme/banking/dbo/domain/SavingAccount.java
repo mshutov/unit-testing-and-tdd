@@ -1,5 +1,7 @@
 package com.acme.banking.dbo.domain;
 
+import javax.print.DocFlavor;
+
 import static com.acme.banking.dbo.util.Utils.require;
 
 public class SavingAccount implements Account {
@@ -34,5 +36,16 @@ public class SavingAccount implements Account {
     @Override
     public Account withClient(Client newClient) {
         return new SavingAccount(id, newClient, amount);
+    }
+
+    @Override
+    public Account withdraw(double amount) {
+        require(amount <= this.amount);
+        return new SavingAccount(id, client, this.amount - amount);
+    }
+
+    @Override
+    public Account deposit(double amount) {
+        return new SavingAccount(id, client, this.amount + amount);
     }
 }
