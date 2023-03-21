@@ -28,7 +28,9 @@ public class Reporting {
         List<Account> accounts = entry.getValue();
         return printClient(client)
                 + "\n----------\n"
-                + accounts.stream().map(Reporting::printAccount).collect(Collectors.joining("\n"));
+                + accounts.stream()
+                .map(Reporting::printAccount)
+                .collect(Collectors.joining("\n"));
     }
 
     private static String printAccount(Account acc) {
